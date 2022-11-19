@@ -1,0 +1,57 @@
+/*Bismillahir Rahmanir Raheem-In the name of Allah."
+ code of MD ARIFUL ISLAM */
+
+#include<bits/stdc++.h>
+#include <sstream>
+using namespace std;
+
+double operation(double a , double b , char opt) 
+{
+    double sum ;
+    if(opt == '^')
+    {
+        int x = (int)a ; sum = 1 ;
+        while(x--)
+            sum = sum*b ;
+    }
+    else if(opt == '+')
+        sum = a+b ;
+    else if(opt == '-')
+        sum = b-a ;
+    else if(opt == '*')
+        sum = b*a ;
+    else if(opt == '/')
+        sum = b/a ;
+    return sum ;
+}
+int main()
+{
+    string s ;
+    cin >> s ;
+    stack <double> myst ;
+    for(int i =0 ; i<s.size() ; i++)
+    {
+        if(s[i] == ',') continue ;
+        if(s[i] == '+' || s[i] == '-' || s[i] == '*' || s[i] == '/' || s[i] == '^')
+        {
+            double a , b ;
+            a = myst.top() ; myst.pop() ;
+            b = myst.top() ; myst.pop() ;
+            myst.push(operation(a , b, s[i])) ;
+        }
+        else
+        {
+            string key ="" ;
+            while(s[i] != ','){
+                key += s[i] ; i++ ;
+            }
+            double value ;
+            stringstream ss;  
+            ss << key;  
+            ss >> value;
+            myst.push(value) ;
+        }
+
+    }
+    cout << myst.top() << endl ;
+}
