@@ -1,0 +1,64 @@
+/*Bismillahir Rahmanir Raheem-In the name of Allah."
+ code of MD ARIFUL ISLAM */
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{ 
+    string s ;
+    cin >> s ;
+    cout << "infix " << s << e ;
+    s += ')' ;
+    stack<char> myst ;
+    myst.push('(') ;
+    std::map<char, int> mp;
+    mp['+']= 1 ;
+    mp['-']= 1 ;
+    mp['*']= 2 ;
+    mp['/']= 2 ;
+    mp['^']= 3 ;
+    string post ="" ;
+    for(int i =0 ; i<s.size() ; i++)
+    {
+        if(s[i] == '(' || s[i] == ')')
+        {
+            if(s[i] == '(')
+                myst.push(s[i]) ;
+            else {
+                while(myst.top() != '(')
+                {
+                    post += myst.top() ; 
+                    myst.pop() ;
+                }
+                myst.pop() ;
+            }
+        }
+        else if(s[i] == '+' || s[i] == '-' ||s[i] == '*' || s[i] == '/' || s[i] == '^')
+        {
+            char c = myst.top() ;
+            if(c == '(')
+                myst.push(s[i]) ;
+            else
+            {
+                if(mp[s[i]] > mp[c])
+                    myst.push(s[i]) ;
+                else{
+                    while(true)
+                    {
+                        c = myst.top() ;
+                        if(c == '(' || mp[c] < mp[s[i]])
+                            break ;
+                        post += c ; myst.pop() ;
+                    }
+                    myst.push(s[i]) ;
+                }
+                
+            }
+        }
+        else
+        {
+            post += s[i] ;
+        }
+    }
+    cout << "postfix " << post << e ;
+}
