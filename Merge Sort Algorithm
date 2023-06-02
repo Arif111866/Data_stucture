@@ -44,11 +44,12 @@ void merg(int arr[] , int begin , int mid , int end)
 	}
 	for ( ; i < tem1 ; i++) {
 		arr[k] = left[i] ;
+		k++ ;
 	}
 	for (; j < tem2 ; j++) {
 		arr[k] = right[j] ;
+		k++ ;
 	}
-	delete[] left ;			delete[] right ;
 }
 
 
